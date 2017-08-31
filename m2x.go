@@ -47,6 +47,23 @@ func main() {
 
 	app.Commands = []cli.Command{
 		{
+			Name:  "column",
+			Usage: "显示列",
+			Action: func(c *cli.Context) error {
+				var table model.Table
+				if tables, err := parseTables(c); err != nil {
+					return err
+				} else {
+					table = tables[0]
+				}
+				cols := table.Columns()
+				for col := range cols {
+					fmt.Printf("%s\t%s\t%s\n", col.Name(), col.Type().String(), col.Comment())
+				}
+				return nil
+			},
+		},
+		{
 			Name:  "odps",
 			Usage: "生成odps建表语句",
 			Action: func(c *cli.Context) error {
