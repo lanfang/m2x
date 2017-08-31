@@ -56,8 +56,8 @@ func tableToDataxOts(c *cli.Context, table model.Table) string {
 	cols := table.Columns()
 	var columns []string
 	var splitPk string
-	var primaryKeys []interface{}
-	var normals []interface{}
+	primaryKeys := []interface{}{}
+	normals := []interface{}{}
 	for col := range cols {
 		columns = append(columns, col.Name())
 		if col.IsPrimary() && (col.Type() == model.ColumnTypeBigInt || col.Type() == model.ColumnTypeInt || col.Type() == model.ColumnTypeInteger) {
