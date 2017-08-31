@@ -75,6 +75,7 @@ func tableToDataxOts(c *cli.Context, table model.Table) string {
 	}
 	data := map[string]interface{}{
 		"host":          c.GlobalString("host"),
+		"user":          c.GlobalString("user"),
 		"password":      c.GlobalString("password"),
 		"column":        toJSON(&columns),
 		"splitPk":       splitPk,
