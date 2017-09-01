@@ -23,7 +23,7 @@ func tableToGoMod(c *cli.Context, table model.Table) string {
 		fields = append(fields, map[string]interface{}{
 			"field": camelCase(col.Name()),
 			"type":  colunmTypeToGoModType(col.Type()),
-			"tag":   fmt.Sprintf("`json:\"%s\" orm:\"column(%s)\"`", col.Name(), col.Name()),
+			"tag":   fmt.Sprintf("`json:\"%s\"`", col.Name()),
 		})
 	}
 	data := map[string]interface{}{
