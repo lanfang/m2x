@@ -64,6 +64,20 @@ func main() {
 			},
 		},
 		{
+			Name:  "gomod",
+			Usage: "生成go model",
+			Action: func(c *cli.Context) error {
+				var table model.Table
+				if tables, err := parseTables(c); err != nil {
+					return err
+				} else {
+					table = tables[0]
+				}
+				fmt.Println(tableToGoMod(c, table))
+				return nil
+			},
+		},
+		{
 			Name:  "odps",
 			Usage: "生成odps建表语句",
 			Action: func(c *cli.Context) error {
