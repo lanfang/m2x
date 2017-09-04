@@ -2,3 +2,4 @@ migrate-table
 /m2x
 .DS_Store
 /*.sql
+/sync.sh
