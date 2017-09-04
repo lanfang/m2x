@@ -100,65 +100,65 @@ func toJSON(obj interface{}) string {
 func colunmTypeToOtsStringType(c model.ColumnType) string {
 	switch c {
 	case model.ColumnTypeBit:
-		return "INTEGER"
+		return "int"
 	case model.ColumnTypeTinyInt:
-		return "INTEGER"
+		return "int"
 	case model.ColumnTypeSmallInt:
-		return "INTEGER"
+		return "int"
 	case model.ColumnTypeMediumInt:
-		return "INTEGER"
+		return "int"
 	case model.ColumnTypeInt:
-		return "INTEGER"
+		return "int"
 	case model.ColumnTypeInteger:
-		return "INTEGER"
+		return "int"
 	case model.ColumnTypeBigInt:
-		return "INTEGER"
+		return "int"
 	case model.ColumnTypeReal:
-		return "DOUBLE"
+		return "double"
 	case model.ColumnTypeDouble:
-		return "DOUBLE"
+		return "double"
 	case model.ColumnTypeFloat:
-		return "DOUBLE"
+		return "double"
 	case model.ColumnTypeDecimal:
-		return "DOUBLE"
+		return "double"
 	case model.ColumnTypeNumeric:
-		return "INTEGER"
+		return "int"
 	case model.ColumnTypeDate:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeTime:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeTimestamp:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeDateTime:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeYear:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeChar:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeVarChar:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeBinary:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeVarBinary:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeTinyBlob:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeBlob:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeMediumBlob:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeLongBlob:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeTinyText:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeText:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeMediumText:
-		return "STRING"
+		return "string"
 	case model.ColumnTypeLongText:
-		return "STRING"
+		return "string"
 	default:
-		return "STRING"
+		return "string"
 	}
 }
 
