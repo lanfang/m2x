@@ -8,6 +8,7 @@ import (
 	"github.com/qjpcpu/schemalex"
 	"github.com/qjpcpu/schemalex/model"
 	"github.com/urfave/cli"
+	"io/ioutil"
 	"os"
 	"strings"
 )
@@ -42,6 +43,10 @@ func main() {
 		cli.StringFlag{
 			Name:  "table, t",
 			Usage: "table name",
+		},
+		cli.StringFlag{
+			Name:  "file, f",
+			Usage: "sql file name",
 		},
 	}
 
@@ -130,6 +135,9 @@ func main() {
 }
 
 func parseTables(c *cli.Context) ([]model.Table, error) {
+	if sqlfile := c.GlobalString("file"); sqlfile != "" {
+		return parseTablesFromSqlfile(sqlfile)
+	}
 	if table := c.GlobalString("table"); table == "" {
 		return nil, errors.New("请指定表名")
 	}
@@ -158,6 +166,14 @@ func parseTables(c *cli.Context) ([]model.Table, error) {
 		return nil, err
 	}
 	return parseTablesFromSql(sql)
+}
+
+func parseTablesFromSqlfile(file string) ([]model.Table, error) {
+	dat, err := ioutil.ReadFile(file)
+	if err != nil {
+		return nil, err
+	}
+	return parseTablesFromSql(string(dat))
 }
 
 func parseTablesFromSql(sql string) ([]model.Table, error) {
