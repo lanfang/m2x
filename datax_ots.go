@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"github.com/hoisie/mustache"
 	"github.com/qjpcpu/schemalex/model"
 	"github.com/urfave/cli"
@@ -32,7 +33,7 @@ const Templ = `{
                 "writer": {
                     "name": "otswriter",
                     "parameter": {
-                        "endpoint":"http://{{{instance_name}}}.cn-hangzhou.ots.aliyuncs.com",
+                        "endpoint":"{{{endpoint}}}",
                         "accessId":"{{{access_id}}}",
                         "accessKey":"{{{access_key}}}",
                         "instanceName":"{{{instance_name}}}",
@@ -73,6 +74,13 @@ func tableToDataxOts(c *cli.Context, table model.Table) string {
 			})
 		}
 	}
+	var endpoint string
+	if c.String("endpoint") == "" {
+		endpoint = fmt.Sprintf("http://%s.cn-hangzhou.ots.aliyuncs.com", c.String("instance_name"))
+	} else {
+		endpoint = c.String("endpoint")
+	}
+
 	data := map[string]interface{}{
 		"host":          c.GlobalString("host"),
 		"user":          c.GlobalString("user"),
@@ -83,6 +91,7 @@ func tableToDataxOts(c *cli.Context, table model.Table) string {
 		"port":          c.GlobalString("port"),
 		"db":            c.GlobalString("db"),
 		"instance_name": c.String("instance_name"),
+		"endpoint":      endpoint,
 		"access_id":     c.String("id"),
 		"access_key":    c.String("key"),
 		"primary_keys":  toJSON(primaryKeys),

@@ -125,6 +125,10 @@ func main() {
 					Usage: "table store access key",
 					Value: "**********",
 				},
+				cli.StringFlag{
+					Name:  "endpoint, e",
+					Usage: "table store endpoint",
+				},
 			},
 		},
 	}
