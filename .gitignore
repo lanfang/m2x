@@ -3,3 +3,6 @@ migrate-table
 .DS_Store
 /*.sql
 /sync.sh
+/m2col
+/m2ots
+/tunnel.sh
