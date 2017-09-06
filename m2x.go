@@ -169,7 +169,7 @@ func parseTables(c *cli.Context) ([]model.Table, error) {
 	if err := result.Scan(&nonce, &sql); err != nil {
 		return nil, err
 	}
-	return parseTablesFromSql(sql)
+	return parseTablesFromSql(sql + "\n")
 }
 
 func parseTablesFromSqlfile(file string) ([]model.Table, error) {
