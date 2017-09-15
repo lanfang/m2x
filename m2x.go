@@ -97,6 +97,98 @@ func main() {
 			},
 		},
 		{
+			Name:  "dx-odps",
+			Usage: "生成odps-mysql数据导出datax配置",
+			Flags: []cli.Flag{
+				cli.StringFlag{
+					Name:  "otable",
+					Usage: "odps project and table,e.g. project.table",
+				},
+				cli.StringFlag{
+					Name:  "partition, pt",
+					Usage: "odps parition",
+				},
+				cli.StringFlag{
+					Name:  "id",
+					Usage: "odps access id",
+				},
+				cli.StringFlag{
+					Name:  "key",
+					Usage: "odps access key",
+				},
+				cli.StringFlag{
+					Name:  "endpoint, e",
+					Usage: "odps endpoint",
+					Value: "http://service.odps.aliyun.com/api",
+				},
+				cli.IntFlag{
+					Name:  "channel",
+					Usage: "odps channel",
+					Value: 5,
+				},
+			},
+			Action: func(c *cli.Context) error {
+				var table model.Table
+				if tables, err := parseTables(c); err != nil {
+					return err
+				} else {
+					table = tables[0]
+				}
+				fmt.Println(tableToDataxOdps(c, table))
+				return nil
+			},
+		},
+		{
+			Name:  "dx-rodps",
+			Usage: "生成mysql-odps数据导入datax配置",
+			Flags: []cli.Flag{
+				cli.StringFlag{
+					Name:  "otable",
+					Usage: "odps project and table,e.g. project.table",
+				},
+				cli.StringFlag{
+					Name:  "partition, pt",
+					Usage: "odps parition",
+				},
+				cli.StringFlag{
+					Name:  "id",
+					Usage: "odps access id",
+				},
+				cli.StringFlag{
+					Name:  "key",
+					Usage: "odps access key",
+				},
+				cli.StringFlag{
+					Name:  "endpoint, e",
+					Usage: "odps endpoint",
+					Value: "http://service.odps.aliyun.com/api",
+				},
+				cli.IntFlag{
+					Name:  "channel",
+					Usage: "odps channel",
+					Value: 5,
+				},
+				cli.StringFlag{
+					Name:  "backup",
+					Usage: "数据备份到文本文件",
+				},
+				cli.StringFlag{
+					Name:  "where",
+					Usage: "sql过滤条件",
+				},
+			},
+			Action: func(c *cli.Context) error {
+				var table model.Table
+				if tables, err := parseTables(c); err != nil {
+					return err
+				} else {
+					table = tables[0]
+				}
+				fmt.Println(tableToDataxRodps(c, table))
+				return nil
+			},
+		},
+		{
 			Name:  "dx-ots",
 			Usage: "生成datax table store配置job",
 			Action: func(c *cli.Context) error {

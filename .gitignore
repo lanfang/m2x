@@ -6,3 +6,5 @@ migrate-table
 /m2col
 /m2ots
 /tunnel.sh
+/m2odps
+/odps2m
