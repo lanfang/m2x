@@ -11,7 +11,7 @@ import (
 const GoModTempl = `
 type {{mod_name}} struct {
 {{#fields}}
-    {{field}}       {{type}}        {{{tag}}}
+    {{field}}       {{type}}        {{{tag}}}  {{{comment}}}
 {{/fields}}
 }
 `
@@ -20,10 +20,15 @@ func tableToGoMod(c *cli.Context, table model.Table) string {
 	cols := table.Columns()
 	fields := []interface{}{}
 	for col := range cols {
+		comment := col.Comment()
+		if comment != "" {
+			comment = "// " + comment
+		}
 		fields = append(fields, map[string]interface{}{
-			"field": camelCase(col.Name()),
-			"type":  colunmTypeToGoModType(col.Type()),
-			"tag":   fmt.Sprintf("`json:\"%s\"`", col.Name()),
+			"field":   camelCase(col.Name()),
+			"type":    colunmTypeToGoModType(col.Type()),
+			"tag":     fmt.Sprintf("`json:\"%s\"`", col.Name()),
+			"comment": comment,
 		})
 	}
 	data := map[string]interface{}{
