@@ -55,15 +55,16 @@ func main() {
 			Name:  "column",
 			Usage: "显示列",
 			Action: func(c *cli.Context) error {
-				var table model.Table
 				if tables, err := parseTables(c); err != nil {
 					return err
 				} else {
-					table = tables[0]
-				}
-				cols := table.Columns()
-				for col := range cols {
-					fmt.Printf("%s\t%s\t%s\n", col.Name(), col.Type().String(), col.Comment())
+					for _, table := range tables {
+						fmt.Printf("============= %s ============\n", table.Name())
+						cols := table.Columns()
+						for col := range cols {
+							fmt.Printf("%s\t%s\t%s\n", col.Name(), col.Type().String(), col.Comment())
+						}
+					}
 				}
 				return nil
 			},
@@ -72,13 +73,13 @@ func main() {
 			Name:  "gomod",
 			Usage: "生成go model",
 			Action: func(c *cli.Context) error {
-				var table model.Table
 				if tables, err := parseTables(c); err != nil {
 					return err
 				} else {
-					table = tables[0]
+					for _, table := range tables {
+						fmt.Println(tableToGoMod(c, table))
+					}
 				}
-				fmt.Println(tableToGoMod(c, table))
 				return nil
 			},
 		},
@@ -86,13 +87,13 @@ func main() {
 			Name:  "odps",
 			Usage: "生成odps建表语句",
 			Action: func(c *cli.Context) error {
-				var table model.Table
 				if tables, err := parseTables(c); err != nil {
 					return err
 				} else {
-					table = tables[0]
+					for _, table := range tables {
+						fmt.Println(tableToOdpsSql(table))
+					}
 				}
-				fmt.Println(tableToOdpsSql(table))
 				return nil
 			},
 		},
@@ -128,13 +129,13 @@ func main() {
 				},
 			},
 			Action: func(c *cli.Context) error {
-				var table model.Table
 				if tables, err := parseTables(c); err != nil {
 					return err
 				} else {
-					table = tables[0]
+					for _, table := range tables {
+						fmt.Println(tableToDataxOdps(c, table))
+					}
 				}
-				fmt.Println(tableToDataxOdps(c, table))
 				return nil
 			},
 		},
@@ -178,13 +179,13 @@ func main() {
 				},
 			},
 			Action: func(c *cli.Context) error {
-				var table model.Table
 				if tables, err := parseTables(c); err != nil {
 					return err
 				} else {
-					table = tables[0]
+					for _, table := range tables {
+						fmt.Println(tableToDataxRodps(c, table))
+					}
 				}
-				fmt.Println(tableToDataxRodps(c, table))
 				return nil
 			},
 		},
