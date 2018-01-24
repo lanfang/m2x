@@ -39,4 +39,8 @@ GLOBAL OPTIONS:
    --file value, -f value      sql file name
    --help, -h                  show help
    --version, -v               print the version
+
+e.g.
+m2x  --host 10.11.200.1 -u USER -p PWD -t DB.TABLE gomod
+m2x -f example.sql gomod
 ```
